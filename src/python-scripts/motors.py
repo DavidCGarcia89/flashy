@@ -8,8 +8,7 @@ for x in range(0, 26):
     
     GPIO.setup(Motor2A,GPIO.OUT)
 
-    print('Turning light on')
-    print(x)
+    print('Turning light on: %d',x)
     GPIO.output(Motor2A,GPIO.HIGH)
     
     sleep(0.5)
