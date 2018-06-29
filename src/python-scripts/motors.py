@@ -3,16 +3,17 @@ from time import sleep
  
 GPIO.setmode(GPIO.BOARD)
  
-Motor1A = 16
+Motor2A = 7
+
  
-GPIO.setup(Motor1A,GPIO.OUT)
+GPIO.setup(Motor2A,GPIO.OUT)
 
 print "Turning light on"
-GPIO.output(Motor1A,GPIO.HIGH)
+GPIO.output(Motor2A,GPIO.HIGH)
  
 sleep(2)
  
 print "Turning light off"
-GPIO.output(Motor1E,GPIO.LOW)
- 
+GPIO.output(Motor2A,GPIO.LOW)
+
 GPIO.cleanup()
