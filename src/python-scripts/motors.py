@@ -3,7 +3,7 @@ from time import sleep
  
 GPIO.setmode(GPIO.BCM)
 
-for x in range(2, 26):
+for x in range(0, 26):
     Motor2A = x
     
     GPIO.setup(Motor2A,GPIO.OUT)
