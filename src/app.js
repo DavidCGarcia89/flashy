@@ -1,9 +1,9 @@
-import * as express from "express";
-import * as cmd from "node-cmd";
+var express = require("express");
+var cmd = require ("node-cmd");
 
 var app = express();
 
-app.get('/', function (req: any, res: any) {
+app.get('/', function (req, res) {
   res.send('Hello World!');
   /*cmd.get(
       'py ./python-scripts/motors.py',
