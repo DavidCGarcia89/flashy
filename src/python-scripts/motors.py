@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 from time import sleep
  
 GPIO.setmode(GPIO.BCM)
-for x in range(0, 27):
+for x in range(26, 38):
     Motor2A = x
     
     GPIO.setup(Motor2A,GPIO.OUT)
@@ -11,7 +11,7 @@ for x in range(0, 27):
     print(x)
     GPIO.output(Motor2A,GPIO.HIGH)
     
-    sleep(0.5)
+    sleep(1)
     
     print('Turning light off')
     GPIO.output(Motor2A,GPIO.LOW)   
