@@ -3,7 +3,7 @@ from time import sleep
  
 GPIO.setmode(GPIO.BOARD)
  
-Motor2A = 7
+Motor2A = 4
 
  
 GPIO.setup(Motor2A,GPIO.OUT)
