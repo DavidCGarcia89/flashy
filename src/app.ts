@@ -5,7 +5,7 @@ var app = express();
 
 app.get('/', function (req: any, res: any) {
   res.send('Hello World!');
-  cmd.get(
+  /*cmd.get(
       'py ./python-scripts/motors.py',
       function(err, data, stderr){
           if (!err) {
@@ -14,7 +14,7 @@ app.get('/', function (req: any, res: any) {
              console.log('error', err)
           }
       }
-  )
+  )*/
 });
 
 app.listen(3000, function () {
