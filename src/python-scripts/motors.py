@@ -12,7 +12,7 @@ print('Turning light on')
 
 GPIO.output(Motor2A,GPIO.HIGH)
 
-sleep(1)
+sleep(2)
 
 print('Turning light off')
 GPIO.output(Motor2A,GPIO.LOW)   
