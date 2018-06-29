@@ -5,7 +5,7 @@ var app = express();
 
 app.get('/', function (req, res) {
   //res.send('Hello World!');
-  var pyProcess = cmd.get('python ./public/algoritmo/munkresAlgorithm.py',
+  var pyProcess = cmd.get('python ./python-scripts/motors.py',
         function(data, err, stderr) {
             if (!err) {
               console.log("Llamada a python correcta")
