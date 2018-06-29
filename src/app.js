@@ -4,7 +4,7 @@ var cmd = require ("node-cmd");
 var app = express();
 
 app.get('/', function (req, res) {
-  var pyProcess = cmd.get('py ./src/python-scripts/motors.py',
+  var pyProcess = cmd.get('python3 ./src/python-scripts/motors.py',
         function(data, err, stderr) {
             if (!err) {
               console.log("Llamada al cmd correcta")
