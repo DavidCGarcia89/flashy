@@ -1,0 +1,24 @@
+{
+  "name": "flushy",
+  "version": "1.0.0",
+  "description": "servicio web que recibira llamadas",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "node-cmd": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidCGarcia89/flushy.git"
+  },
+  "author": "David y Diego",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidCGarcia89/flushy/issues"
+  },
+  "homepage": "https://github.com/DavidCGarcia89/flushy#readme"
+}
