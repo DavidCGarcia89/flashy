@@ -17,6 +17,6 @@ sleep(2)
 
 for x in range (1,27):
     print('Turning light off')
-    .output(Motor2A,GPIO.LOW)
+    GPIO.output(Motor2A,GPIO.LOW)
 
 GPIO.cleanup()
