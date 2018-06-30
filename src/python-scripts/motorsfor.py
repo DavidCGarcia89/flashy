@@ -4,7 +4,7 @@ import sys
  
 GPIO.setmode(GPIO.BCM)
 
-for x in range(1,27)
+for x in range(1,27):
     Motor2A = x
     print(Motor2A)
 
