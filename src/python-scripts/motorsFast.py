@@ -17,7 +17,7 @@ print(Motor2A)
 GPIO.setup(Motor2A,GPIO.OUT)
 porcentaje0=porcentaje
 for i in range(bucle*100):
-porcentaje=porcentaje0*(1+0.5*sin(i/100))
+    porcentaje=porcentaje0*(1+0.5*sin(i/100))
     for x in range(bucle*100):
         GPIO.output(Motor2A,GPIO.HIGH)
         sleep(porcentaje/1000)
