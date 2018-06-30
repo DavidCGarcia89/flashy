@@ -3,7 +3,7 @@ from time import sleep
 import sys
  
 GPIO.setmode(GPIO.BCM)
-print(sys.argc)
+
 if (len(sys.argv) != 4):
     print("Uso: python3 motorsFast.py #Pin #ciclosBucle #tiempoEntreEncedidoyApagado")
     exit(1)
