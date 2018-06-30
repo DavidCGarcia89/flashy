@@ -4,7 +4,7 @@ import sys
  
 GPIO.setmode(GPIO.BCM)
 
-Motor2A = 20
+Motor2A = 26
 
 GPIO.setup(Motor2A,GPIO.OUT)
 
