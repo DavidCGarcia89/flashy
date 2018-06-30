@@ -9,13 +9,13 @@ if (len(sys.argv) != 4):
     exit(1)
 Motor2A = int(sys.argv[1])
 bucle = int(sys.argv[2])
-tiempo = int(sys.argv[3])
+tiempo = float(sys.argv[3])
 
 print(Motor2A)
 
 GPIO.setup(Motor2A,GPIO.OUT)
 for x in range(bucle):
     GPIO.output(Motor2A,GPIO.HIGH)
-    sleep(0.1)
+    sleep(tiempo)
     GPIO.output(Motor2A,GPIO.LOW)   
 GPIO.cleanup()
