@@ -4,7 +4,7 @@ import sys
  
 GPIO.setmode(GPIO.BCM)
 print(sys.argc)
-if (sys.argc != 4):
+if (len(sys.argv) != 4):
     print("Uso: python3 motorsFast.py #Pin #ciclosBucle #tiempoEntreEncedidoyApagado")
     exit(1)
 Motor2A = int(sys.argv[1])
