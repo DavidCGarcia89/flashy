@@ -10,7 +10,7 @@ if (len(sys.argv) != 5):
 Motor2A = int(sys.argv[1])
 bucle = int(sys.argv[2])
 tiempo = float(sys.argv[3])
-porcentaje = float(sys.arv[4])
+porcentaje = float(sys.argv[4])
 
 print(Motor2A)
 
