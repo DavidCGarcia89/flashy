@@ -4,7 +4,8 @@ import sys
  
 GPIO.setmode(GPIO.BCM)
 
-Motor2A = sys.argv[2]
+Motor2A = int(sys.argv[1])
+print(Motor2A)
 
 GPIO.setup(Motor2A,GPIO.OUT)
 
