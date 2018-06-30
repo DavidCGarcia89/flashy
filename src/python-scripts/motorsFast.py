@@ -6,6 +6,7 @@ GPIO.setmode(GPIO.BCM)
 
 if (sys.argc != 4)
     print("Uso: python3 motorsFast.py #Pin #ciclosBucle #tiempoEntreEncedidoyApagado")
+    exit(1)
 Motor2A = int(sys.argv[1])
 bucle = int(sys.argv[2])
 tiempo = int(sys.argv[3])
