@@ -16,6 +16,14 @@ app.get('/', function (req, res) {
         }
     );
 });
+app.get('/raspberry', function (req, res) {
+    const pin = req.query.pin;
+    if (pin*1 === 10) {
+        res.send(true);
+    } else {
+        res.send(false);
+    }
+  });
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
