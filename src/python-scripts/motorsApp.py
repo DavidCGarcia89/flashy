@@ -4,13 +4,13 @@ import sys
  
 GPIO.setmode(GPIO.BCM)
 
-Motor2A = 26
+gpioPin = int(sys.argv[1])
+print(gpioPin)
+GPIO.setup(gpioPin,GPIO.OUT)
 
-GPIO.setup(Motor2A,GPIO.OUT)
-
-GPIO.output(Motor2A,GPIO.HIGH)
+GPIO.output(gpioPin,GPIO.HIGH)
 
 sleep(2)
 
-GPIO.output(Motor2A,GPIO.LOW)   
+GPIO.output(gpioPin,GPIO.LOW)   
 GPIO.cleanup()

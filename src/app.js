@@ -23,32 +23,30 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function (req, res) {
-  var pyProcess = cmd.get('python3 ./src/python-scripts/motorsApp.py',
-        function(data, err, stderr) {
-            if (!err) {
-              console.log("Llamada al cmd correcta")
-              res.send('Hello World!');
-            } 
-            else {
-                console.log("python script cmd error: " + err)
-            }
-        }
-    );
+    res.status(200).send("Hay conexión");
 });
+
 app.get('/raspberry', function (req, res) {
-    const pin = req.query.pin;
-    if (pin*1 === 10) {
-        setTimeout(() => {
-            res.send(true);
-        }, 2000);
-        
-    } else {
-        setTimeout(() => {
-            res.send(false);
-        }, 1000);
-        
+  const pin = req.query.pin;
+  if(pin === undefined){
+    res.send("Es necesario indicar el pin de conexión");
+  } else {
+        const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
+        console.log(comando);
+        cmd.get(comando,
+            function(data, err, stderr) {
+                if (!err) {
+                console.log("¡Llamada con éxito!")
+                res.status(200).send('¡Llamada con éxito!');
+                } 
+                else {
+                    console.log("python script cmd error: " + err)
+                    res.send("Hubo un error en la raspberry");
+                }
+            }
+        );
     }
-  });
+});
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
