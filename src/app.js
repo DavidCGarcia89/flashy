@@ -38,7 +38,7 @@ app.get('/raspberry', function (req, res) {
             function(data, err, stderr) {
                 if (!err) {
                 console.log("¡Llamada con éxito!")
-                res.send('200');//¡Llamada con éxito!
+                res.status(200).send('pk');//¡Llamada con éxito!
                 } 
                 else {
                     console.log("python script cmd error: " + err)
