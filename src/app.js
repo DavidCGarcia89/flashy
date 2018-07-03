@@ -29,9 +29,9 @@ app.get('/', function (req, res) {
 app.get('/raspberry', function (req, res) {
   const pin = req.query.pin;
   if(pin === undefined){
-    res.send("Es necesario indicar el pin de conexión");
+    res.status(422).send("Es necesario indicar el pin de conexión");
   } else if (pin >26 || pin < 2){
-    res.send("El pin debe estar entre el 2 y el 26");
+    res.status(422).send("El pin debe estar entre el 2 y el 26");
   } else {
         const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
         console.log(comando);
@@ -43,7 +43,7 @@ app.get('/raspberry', function (req, res) {
                 } 
                 else {
                     console.log("python script cmd error: " + err)
-                    res.send("Hubo un error en la raspberry");
+                    res.status(409).send("Hubo un error en la raspberry");
                 }
             }
         );
