@@ -5,7 +5,7 @@ import sys
 GPIO.setmode(GPIO.BCM)
 
 gpioPin = int(sys.argv[1])
-print(gpioPin)
+
 GPIO.setup(gpioPin,GPIO.OUT)
 
 GPIO.output(gpioPin,GPIO.HIGH)
