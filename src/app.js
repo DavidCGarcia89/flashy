@@ -37,19 +37,19 @@ app.get('/raspberry', function (req, res) {
                 function(data, err, stderr) {
                     if (!err) {
                     console.log("¡Llamada con éxito!")
-                    res.send("200");//¡Llamada con éxito!
+                    res.send("Ok");//¡Llamada con éxito!
                     } 
                     else {
                         console.log("python script cmd error: " + err)
-                        res.send("409");//Hubo un error en la raspberry
+                        res.send("Error");//Hubo un error en la raspberry
                     }
                 }
             );
         } else {
-            res.send("422-2");//"El pin debe estar entre el 2 y el 26"
+            res.send("Pin Incorrecto");//"El pin debe estar entre el 2 y el 26"
         }
     } else {
-        res.send("422-1");//Se debe definir el pin
+        res.send("Sin pin");//Se debe definir el pin
     }
 });
 
