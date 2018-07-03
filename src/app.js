@@ -39,14 +39,14 @@ app.get('/raspberry', function (req, res) {
     const pin = req.query.pin;
     if (pin*1 === 10) {
         setTimeout(() => {
-      
+            res.send(true);
         }, 2000);
-        res.send(true);
+        
     } else {
         setTimeout(() => {
-      
+            res.send(false);
         }, 1000);
-        res.send(false);
+        
     }
   });
 
