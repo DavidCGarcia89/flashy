@@ -27,25 +27,29 @@ app.get('/', function (req, res) {
 });
 
 app.get('/raspberry', function (req, res) {
-  const pin = req.query.pin;
-  if(pin === undefined){
-    res.send("422-1");//Se debe definir el pin
-  } else if (pin >26 || pin < 2){
-    res.send("422-2");//"El pin debe estar entre el 2 y el 26"
-  } else {
-        const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
-        cmd.get(comando,
-            function(data, err, stderr) {
-                if (!err) {
-                console.log("¡Llamada con éxito!")
-                res.send("200");//¡Llamada con éxito!
-                } 
-                else {
-                    console.log("python script cmd error: " + err)
-                    res.send("409");//Hubo un error en la raspberry
+    const es_numero = new RegExp("^[0-9]+$");
+    const pin = req.query.pin;
+    if (es_numero.test(pin)){
+        pin = pin*1;
+        if (pin>1 && pin<27){
+            const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
+            cmd.get(comando,
+                function(data, err, stderr) {
+                    if (!err) {
+                    console.log("¡Llamada con éxito!")
+                    res.send("200");//¡Llamada con éxito!
+                    } 
+                    else {
+                        console.log("python script cmd error: " + err)
+                        res.send("409");//Hubo un error en la raspberry
+                    }
                 }
-            }
-        );
+            );
+        } else {
+            res.send("422-2");//"El pin debe estar entre el 2 y el 26"
+        }
+    } else {
+        res.send("422-1");//Se debe definir el pin
     }
 });
 
