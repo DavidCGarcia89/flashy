@@ -32,7 +32,7 @@ app.get('/raspberry', function (req, res) {
     if (es_numero.test(pin)){
         pin = pin*1;
         if (pin>1 && pin<27){
-            const comando = "py ./src/python-scripts/motorsApp.py " + pin;
+            const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
             cmd.get(comando,
                 function(data, err, stderr) {
                     if (!err) {
