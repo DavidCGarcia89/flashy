@@ -28,11 +28,11 @@ app.get('/', function (req, res) {
 
 app.get('/raspberry', function (req, res) {
     const es_numero = new RegExp("^[0-9]+$");
-    const pin = req.query.pin;
+    let pin = req.query.pin;
     if (es_numero.test(pin)){
         pin = pin*1;
         if (pin>1 && pin<27){
-            const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
+            const comando = "py ./src/python-scripts/motorsApp.py " + pin;
             cmd.get(comando,
                 function(data, err, stderr) {
                     if (!err) {
