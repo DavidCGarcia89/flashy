@@ -30,6 +30,8 @@ app.get('/raspberry', function (req, res) {
   const pin = req.query.pin;
   if(pin === undefined){
     res.send("Es necesario indicar el pin de conexión");
+  } else if (pin >26 || pin < 2){
+    res.send("El pin debe estar entre el 2 y el 26");
   } else {
         const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
         console.log(comando);
