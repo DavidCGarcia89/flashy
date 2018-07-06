@@ -23,7 +23,7 @@ print("termina la espera")
 d=15
 t_end = time.time() + d
 cycle_start = 5.57
-cycle_end = 5.54
+cycle_end = 5.3
 cycle = cycle_start
 while time.time() < t_end: 
     print(cycle)
