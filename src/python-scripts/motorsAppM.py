@@ -19,7 +19,7 @@ while time.time() < t_end:      #iniciamos un loop
 d=5
 t_end = time.time() + d
 cycle_start = 10.5
-cycle_end = 4.5
+cycle_end = 1
 cycle = cycle_start
 while time.time() < t_end: 
     p.ChangeDutyCycle(cycle)
