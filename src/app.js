@@ -53,6 +53,33 @@ app.get('/raspberry', function (req, res) {
     }
 });
 
+app.get('/raspberryMotor', function (req, res) {
+    const es_numero = new RegExp("^[0-9]+$");
+    let pin = req.query.pin;
+    if (es_numero.test(pin)){
+        pin = pin*1;
+        if (pin>1 && pin<27){
+            const comando = "python3 ./src/python-scripts/motorsAppM.py " + pin;
+            cmd.get(comando,
+                function(data, err, stderr) {
+                    if (!err) {
+                    console.log("¡Llamada con éxito!")
+                    res.send({respuesta: 'Ok'});//¡Llamada con éxito!
+                    } 
+                    else {
+                        console.log("python script cmd error: " + err)
+                        res.send({respuesta: 'Error'});//Hubo un error en la raspberry
+                    }
+                }
+            );
+        } else {
+            res.send({respuesta: 'Pin Incorrecto'});//"El pin debe estar entre el 2 y el 26"
+        }
+    } else {
+        res.send({respuesta: 'Sin pin'});//Se debe definir el pin
+    }
+});
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
