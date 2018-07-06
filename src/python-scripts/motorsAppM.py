@@ -16,7 +16,8 @@ while time.time() < t_end:      #iniciamos un loop
                                     #pausa de medio segundo
         # p.ChangeDutyCycle(7.5)    #Enviamos un pulso del 7.5% para centrar el servo de nuevo
         # time.sleep(0.5)           #pausa de medio segundo
-time.sleep(2)
+p.ChangeDutyCycle(7.5)
+time.sleep(5)
 d=10
 t_end = time.time() + d
 cycle_start = 10.5
