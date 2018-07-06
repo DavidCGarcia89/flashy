@@ -18,7 +18,7 @@ while time.time() < t_end:      #iniciamos un loop
         # time.sleep(0.5)           #pausa de medio segundo
 t_end = time.time() + 5
 cycle = 10.5  
-while (time.time() < t_end) or (cycle > 4.5): 
+while time.time() < t_end: 
     p.ChangeDutyCycle(cycle)
     cycle = cycle - 0.1
 
