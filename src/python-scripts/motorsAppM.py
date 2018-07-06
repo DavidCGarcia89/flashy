@@ -16,11 +16,14 @@ while time.time() < t_end:      #iniciamos un loop
                                     #pausa de medio segundo
         # p.ChangeDutyCycle(7.5)    #Enviamos un pulso del 7.5% para centrar el servo de nuevo
         # time.sleep(0.5)           #pausa de medio segundo
-t_end = time.time() + 5
-cycle = 10.5  
+d=5
+t_end = time.time() + d
+cycle_start = 10.5
+cycle_end = 4.5
+cycle = cycle_start
 while time.time() < t_end: 
     p.ChangeDutyCycle(cycle)
-    cycle = cycle - 0.1
+    cycle = cycle_start*((t_end-time.time())/d) + (1-((t_end-time.time())/d))*cycle_end
 
 print("Paramos el bucle")         #Si el usuario pulsa CONTROL+C entonces...
 p.stop()                      #Detenemos el servo 
