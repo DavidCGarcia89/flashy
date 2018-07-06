@@ -18,9 +18,9 @@ while time.time() < t_end:      #iniciamos un loop
         # time.sleep(0.5)           #pausa de medio segundo
 t_end = time.time() + 10
 cycle = 10.5  
-while time.time() < t_end or cycle > 4.5: 
+while (time.time() < t_end) or (cycle > 4.5): 
     p.ChangeDutyCycle(cycle)
-    cycle = cycle - 0.01
+    cycle = cycle - 0.1
 
 print("Paramos el bucle")         #Si el usuario pulsa CONTROL+C entonces...
 p.stop()                      #Detenemos el servo 
