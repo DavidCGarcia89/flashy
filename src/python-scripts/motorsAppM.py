@@ -17,13 +17,13 @@ p.start(7.5)               #Enviamos un pulso del 7.5% para centrar el servo
         # p.ChangeDutyCycle(7.5)    #Enviamos un pulso del 7.5% para centrar el servo de nuevo
         # time.sleep(0.5)           #pausa de medio segundo
 print("centrar")
-p.ChangeDutyCycle(5.55)
+p.ChangeDutyCycle(5.54)
 time.sleep(5)
 print("termina la espera")
 d=15
 t_end = time.time() + d
-cycle_start = 5.7
-cycle_end = 5.5
+cycle_start = 5.56
+cycle_end = 5.53
 cycle = cycle_start
 while time.time() < t_end: 
     print(cycle)
