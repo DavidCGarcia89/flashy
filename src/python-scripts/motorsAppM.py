@@ -9,12 +9,12 @@ print("Comenzamos el bucle")
 try:                 
     while True:      #iniciamos un loop infinito
         print("Estamos en el bucle")
-        # p.ChangeDutyCycle(4.5)    #Enviamos un pulso del 4.5% para girar el servo hacia la izquierda
-        # time.sleep(0.5)           #pausa de medio segundo
+        p.ChangeDutyCycle(4.5)    #Enviamos un pulso del 4.5% para girar el servo hacia la izquierda
+        time.sleep(0.5)           #pausa de medio segundo
         # p.ChangeDutyCycle(10.5)   #Enviamos un pulso del 10.5% para girar el servo hacia la derecha
         # time.sleep(0.5)           #pausa de medio segundo
-        p.ChangeDutyCycle(7.5)    #Enviamos un pulso del 7.5% para centrar el servo de nuevo
-        time.sleep(0.5)           #pausa de medio segundo
+        # p.ChangeDutyCycle(7.5)    #Enviamos un pulso del 7.5% para centrar el servo de nuevo
+        # time.sleep(0.5)           #pausa de medio segundo
 
 except KeyboardInterrupt:
     print("Paramos el bucle")         #Si el usuario pulsa CONTROL+C entonces...
