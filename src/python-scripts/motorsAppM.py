@@ -17,7 +17,7 @@ while time.time() < t_end:      #iniciamos un loop
         # p.ChangeDutyCycle(7.5)    #Enviamos un pulso del 7.5% para centrar el servo de nuevo
         # time.sleep(0.5)           #pausa de medio segundo
 print("centrar")
-p.ChangeDutyCycle(7.5)
+p.ChangeDutyCycle(5)
 time.sleep(5)
 print("termina la espera")
 d=10
@@ -26,7 +26,7 @@ cycle_start = 10.5
 cycle_end = 0
 cycle = cycle_start
 while time.time() < t_end: 
-    printf(cycle)
+    print(cycle)
     p.ChangeDutyCycle(cycle)
     cycle = cycle_start*((t_end-time.time())/d) + (1-((t_end-time.time())/d))*cycle_end
 
