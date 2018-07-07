@@ -73,7 +73,7 @@ app.get('/checkServo', function (req, res) {
             anguloFinal = anguloFinal*1;
             const comando = "python3 ./src/python-scripts/checkServo.py " + pin + " " + duracionInicial + " " + duracionFinal + " " + anguloInicial + " " + anguloFinal;
             console.log("Llamamos a python3")
-            child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
+            child = exec(comando, function (error, stdout, stderr) {
                 if (error !== null) {
                     console.log("python script cmd error: " + err)
                     res.send({respuesta: 'Error'});//Hubo un error en la raspberry
