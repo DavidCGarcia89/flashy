@@ -92,7 +92,7 @@ app.get('/checkServo', function (req, res) {
 
 //Temperatura, Memoria Total, Memoria Libre, Porcentaje de Mem Usada, Tiempo Levantado.
 app.get('/checkStatus', function (req, res) {
-    let memTotal, memUsed, upTime, temp_c;
+    let memTotal, memUsed, upTime;
     //Temperatura
     const temp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
     const temp_c = temp/1000;
