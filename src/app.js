@@ -73,7 +73,7 @@ app.get('/checkServo', function (req, res) {
             anguloFinal = anguloFinal*1;
             const comando = "python3 ./src/python-scripts/checkServo.py " + pin + " " + duracionInicial + " " + duracionFinal + " " + anguloInicial + " " + anguloFinal;
             console.log("Llamamos a python3")
-            child = exec(comando, function (error, stdout, stderr) {
+            exec(comando, function (error, stdout, stderr) {
                 if (error !== null) {
                     console.log("python script cmd error: " + err)
                     res.send({respuesta: 'Error'});//Hubo un error en la raspberry
@@ -98,7 +98,7 @@ app.get('/checkStatus', function (req, res) {
     const temp_c = temp/1000;
     console.log("Temperatura: " + temp_c + "ºC");
     //Memoria total
-    child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
+    exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
         if (error !== null) {
             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
           console.log('exec error: ' + error);
@@ -106,7 +106,7 @@ app.get('/checkStatus', function (req, res) {
             memTotal = parseInt(stdout);
 
             console.log("Memoria Total: " + memTotal + "KB  ");
-            child1 = exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
+            exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
                 if (error == null) {
                     memFree = parseInt(stdout);
                     console.log("Memoria Libre: " + memFree + "KB");
@@ -114,7 +114,7 @@ app.get('/checkStatus', function (req, res) {
                     console.log("Memoria Usada: " + memUsed + "KB");
                     percentUsed = Math.round(memUsed*100/memTotal);
                     console.log("Porcentaje Mem Usada: " + percentUsed + "%");
-                    child = exec("uptime -p", function (error, stdout, stderr) {
+                    exec("uptime -p", function (error, stdout, stderr) {
                         if (error !== null) {
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: percentUsed, uptime: upTime });
                             console.log('exec error: ' + error);
