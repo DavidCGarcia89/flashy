@@ -71,6 +71,7 @@ app.get('/checkServo', function (req, res) {
             duracionFinal = duracionFinal*1;
             anguloInicial = anguloInicial*1;
             anguloFinal = anguloFinal*1;
+            console.log("Llamamos a python3")
             const comando = "python3 ./src/python-scripts/checkServo.py " + pin + " " + duracionInicial + " " + duracionFinal + " " + anguloInicial + " " + anguloFinal;
             cmd.get(comando,
                 function(data, err, stderr) {
