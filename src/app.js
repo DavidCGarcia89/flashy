@@ -120,7 +120,7 @@ app.get('/checkStatus', function (req, res) {
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: percentUsed, uptime: upTime });
                             console.log('exec error: ' + error);
                         } else {
-                            upTime = stdout.split("\\")[0];
+                            upTime = stdout.split("\n")[0];
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
                         }
                     });
