@@ -7,20 +7,20 @@ GPIO.setmode(GPIO.BCM)   #Ponemos la Raspberry en modo BOARD
 GPIO.setup(pin,GPIO.OUT)    #Ponemos el pin 21 como salida
 p = GPIO.PWM(pin,50)        #Ponemos el pin 21 en modo PWM y enviamos 50 pulsos por segundo
 p.start(7.5)            #Enviamos un pulso del 7.5% para centrar el servo
-
-if sys.argv[2]:
+num_elementos = len(sys.argv)
+if num_elementos > 2:
     duracionGiroInicial = float(sys.argv[2])
 else:
     duracionGiroInicial = 5
-if sys.argv[3]:
+if num_elementos > 3:
     duracionGiroContrario = float(sys.argv[3])
 else:
     duracionGiroContrario = 5
-if sys.argv[4]:
+if num_elementos > 4:
     anguloInicial = float(sys.argv[4])
 else:
     anguloInicial = 5
-if sys.argv[5]:
+if num_elementos > 5:
     anguloFinal = float(sys.argv[5])
 else:
     anguloFinal = 10.5
