@@ -104,16 +104,16 @@ app.get('/checkStatus', function (req, res) {
             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
           console.log('exec error: ' + error);
         } else {
-            memTotal = stdout.split("\\")[0];
+            memTotal = parseInt(stdout);
 
             console.log(memTotal);
             child1 = exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
                 if (error == null) {
-                    memFree = stdout.split("\\")[0];;
+                    memFree = parseInt(stdout);
                     console.log(memFree);
-                    memUsed = parseInt(memTotal)-parseInt(memFree);
+                    memUsed = memTotal-memFree;
                     console.log(memUsed);
-                    percentUsed = Math.round(parseInt(memUsed)*100/parseInt(memTotal));
+                    percentUsed = Math.round(memUsed*100/memTotal);
                     console.log(percentUsed);
                     child = exec("uptime | tail -n 1 | awk '{print $3 $4 $5}'", function (error, stdout, stderr) {
                         if (error !== null) {
