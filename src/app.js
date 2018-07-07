@@ -115,13 +115,12 @@ app.get('/checkStatus', function (req, res) {
                     console.log(memUsed);
                     percentUsed = Math.round(memUsed*100/memTotal);
                     console.log(percentUsed);
-                    child = exec("uptime | tail -n 1 | awk '{print $3 $4 $5}'", function (error, stdout, stderr) {
+                    child = exec("uptime -p", function (error, stdout, stderr) {
                         if (error !== null) {
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: percentUsed, uptime: upTime });
                             console.log('exec error: ' + error);
                         } else {
                             upTime = stdout;
-                            console.log("Uptime" + upTime);
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
                         }
                     });
