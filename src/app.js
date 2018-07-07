@@ -1,6 +1,7 @@
 var express = require("express");
 var cmd = require ("node-cmd");
 var fs =  require("fs");
+var exec = require("child_process").exec;
 
 
 var app = express();
