@@ -96,6 +96,7 @@ app.get('/checkStatus', function (req, res) {
     //Temperatura
     const temp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
     const temp_c = temp/1000;
+    console.log(temp_c);
     //Memoria total
     child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
         if (error !== null) {
@@ -103,14 +104,19 @@ app.get('/checkStatus', function (req, res) {
           console.log('exec error: ' + error);
         } else {
             memTotal = stdout;
+            console.log(memTotal);
             child1 = exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
                 if (error == null) {
                     memFree = stdout;
+                    console.log(memFree);
                     memUsed = parseInt(memTotal)-parseInt(memFree);
+                    console.log(memUsed);
                     percentUsed = Math.round(parseInt(memUsed)*100/parseInt(memTotal));
+                    console.log(percentUsed);
                     child = exec("uptime | tail -n 1 | awk '{print $3 $4 $5}'", function (error, stdout, stderr) {
                         if (error !== null) {
                             upTime = stdout;
+                            console.log(upTime);
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
                             console.log('exec error: ' + error);
                         } else {
