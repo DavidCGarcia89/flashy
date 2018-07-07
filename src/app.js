@@ -1,5 +1,7 @@
 var express = require("express");
 var cmd = require ("node-cmd");
+var fs =  require("fs");
+
 
 var app = express();
 
@@ -23,16 +25,51 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function (req, res) {
-    res.status(200).send("Hay conexión");
+    res.send({respuesta: 'Hay conexión'});
 });
 
-app.get('/raspberry', function (req, res) {
+app.get('/checkPin', function (req, res) {
     const es_numero = new RegExp("^[0-9]+$");
     let pin = req.query.pin;
+    if (es_numero.test(pin)) {
+        pin = pin*1;
+        if (pin>1 && pin<27) {
+            const comando = "python3 ./src/python-scripts/checkPin.py " + pin;
+            cmd.get(comando,
+                function(data, err, stderr) {
+                    if (!err) {
+                    console.log("¡Llamada con éxito!");
+                    res.send({respuesta: 'Ok'});//¡Llamada con éxito!
+                    } 
+                    else {
+                        console.log("python script cmd error: " + err)
+                        res.send({respuesta: 'Error'});//Hubo un error en la raspberry
+                    }
+                }
+            );
+        } else {
+            res.send({respuesta: 'Pin Incorrecto'});//"El pin debe estar entre el 2 y el 26"
+        }
+    } else {
+        res.send({respuesta: 'Sin pin'});//Se debe definir el pin
+    }
+});
+
+app.get('/checkServo', function (req, res) {
+    const es_numero = new RegExp("^[0-9]+$");
+    let pin = req.query.pin;
+    let duracionInicial = req.query.durIni || 5;
+    let duracionFinal = req.query.durFin || 5;
+    let anguloInicial = req.query.angIni || 4.5;
+    let anguloFinal = req.quey.angFin || 10.5;
     if (es_numero.test(pin)){
         pin = pin*1;
         if (pin>1 && pin<27){
-            const comando = "python3 ./src/python-scripts/motorsApp.py " + pin;
+            duracionInicial = duracionInicial*1;
+            duracionFinal = duracionFinal*1;
+            anguloInicial = anguloInicial*1;
+            anguloFinal = anguloFinal*1;
+            const comando = "python3 ./src/python-scripts/checkServo.py " + pin + " " + duracionInicial + " " + duracionFinal + " " + anguloInicial + " " + anguloFinal;
             cmd.get(comando,
                 function(data, err, stderr) {
                     if (!err) {
@@ -53,31 +90,40 @@ app.get('/raspberry', function (req, res) {
     }
 });
 
-app.get('/raspberryMotor', function (req, res) {
-    const es_numero = new RegExp("^[0-9]+$");
-    let pin = req.query.pin;
-    if (es_numero.test(pin)){
-        pin = pin*1;
-        if (pin>1 && pin<27){
-            const comando = "python3 ./src/python-scripts/motorsAppM.py " + pin;
-            cmd.get(comando,
-                function(data, err, stderr) {
-                    if (!err) {
-                    console.log("¡Llamada con éxito!")
-                    res.send({respuesta: 'Ok'});//¡Llamada con éxito!
-                    } 
-                    else {
-                        console.log("python script cmd error: " + err)
-                        res.send({respuesta: 'Error'});//Hubo un error en la raspberry
-                    }
-                }
-            );
+//Temperatura, Memoria Total, Memoria Libre, Porcentaje de Mem Usada, Tiempo Levantado.
+app.get('/checkStatus', function (req, res) {
+    let memTotal, memUsed, upTime, temp_c;
+    //Temperatura
+    const temp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
+    const temp_c = temp/1000;
+    //Memoria total
+    child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
+        if (error !== null) {
+            res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
+          console.log('exec error: ' + error);
         } else {
-            res.send({respuesta: 'Pin Incorrecto'});//"El pin debe estar entre el 2 y el 26"
+            memTotal = stdout;
+            child1 = exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
+                if (error == null) {
+                    memFree = stdout;
+                    memUsed = parseInt(memTotal)-parseInt(memFree);
+                    percentUsed = Math.round(parseInt(memUsed)*100/parseInt(memTotal));
+                    child = exec("uptime | tail -n 1 | awk '{print $3 $4 $5}'", function (error, stdout, stderr) {
+                        if (error !== null) {
+                            upTime = stdout;
+                            res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
+                            console.log('exec error: ' + error);
+                        } else {
+                            res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
+                        }
+                    });
+                } else {
+                res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
+                console.log('exec error: ' + error);
+                }
+            });
         }
-    } else {
-        res.send({respuesta: 'Sin pin'});//Se debe definir el pin
-    }
+    });
 });
 
 app.listen(3000, function () {
