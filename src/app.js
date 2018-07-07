@@ -97,7 +97,7 @@ app.get('/checkStatus', function (req, res) {
     //Temperatura
     const temp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
     const temp_c = temp/1000;
-    console.log("Temperatura: " + temp_c);
+    console.log("Temperatura: " + temp_c + "ºC");
     //Memoria total
     child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
         if (error !== null) {
@@ -106,15 +106,15 @@ app.get('/checkStatus', function (req, res) {
         } else {
             memTotal = parseInt(stdout);
 
-            console.log("Memoria Total: " + memTotal);
+            console.log("Memoria Total: " + memTotal + "KB");
             child1 = exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
                 if (error == null) {
                     memFree = parseInt(stdout);
-                    console.log("Memoria Libre: " + memFree);
+                    console.log("Memoria Libre: " + memFree + "KB");
                     memUsed = memTotal-memFree;
-                    console.log("Memoria Usada: " + memUsed);
+                    console.log("Memoria Usada: " + memUsed + "KB");
                     percentUsed = Math.round(memUsed*100/memTotal);
-                    console.log("Porcentaje Usado" + percentUsed + "%");
+                    console.log("Porcentaje Mem Usada: " + percentUsed + "%");
                     child = exec("uptime -p", function (error, stdout, stderr) {
                         if (error !== null) {
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: percentUsed, uptime: upTime });
