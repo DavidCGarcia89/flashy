@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO    #Importamos la libreria RPi.GPIO
 import time                #Importamos time para poder usar time.sleep
+import sys
 
 GPIO.setmode(GPIO.BCM)   #Ponemos la Raspberry en modo BOARD
 GPIO.setup(sys.argv[1],GPIO.OUT)    #Ponemos el pin 21 como salida
@@ -9,7 +10,6 @@ duracionGiroInicial = sys.argv[2] or 5
 duracionGiroContrario = sys.argv[3] or 5
 anguloInicial = sys.argv[4] or 4.5
 anguloFinal = sys.argv[5] or 10.5
-print(duracionGiroInicial)
 t_end = time.time() + duracionGiroInicial 
 while time.time() < t_end:      #iniciamos un loop
     p.ChangeDutyCycle(anguloInicial)      #Enviamos un pulso del 4.5% para girar el servo hacia la izquierda
