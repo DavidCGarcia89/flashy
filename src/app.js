@@ -71,20 +71,18 @@ app.get('/checkServo', function (req, res) {
             duracionFinal = duracionFinal*1;
             anguloInicial = anguloInicial*1;
             anguloFinal = anguloFinal*1;
-            console.log("Llamamos a python3")
             const comando = "python3 ./src/python-scripts/checkServo.py " + pin + " " + duracionInicial + " " + duracionFinal + " " + anguloInicial + " " + anguloFinal;
-            cmd.get(comando,
-                function(data, err, stderr) {
-                    if (!err) {
+            console.log("Llamamos a python3")
+            child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
+                if (error !== null) {
                     console.log("¡Llamada con éxito!")
                     res.send({respuesta: 'Ok'});//¡Llamada con éxito!
-                    } 
-                    else {
-                        console.log("python script cmd error: " + err)
-                        res.send({respuesta: 'Error'});//Hubo un error en la raspberry
-                    }
+                  console.log('exec error: ' + error);
+                } else {
+                    console.log("python script cmd error: " + err)
+                    res.send({respuesta: 'Error'});//Hubo un error en la raspberry
                 }
-            );
+            });
         } else {
             res.send({respuesta: 'Pin Incorrecto'});//"El pin debe estar entre el 2 y el 26"
         }
