@@ -97,7 +97,7 @@ app.get('/checkStatus', function (req, res) {
     //Temperatura
     const temp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
     const temp_c = temp/1000;
-    console.log(temp_c);
+    console.log("Temperatura: " + temp_c);
     //Memoria total
     child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
         if (error !== null) {
@@ -106,21 +106,22 @@ app.get('/checkStatus', function (req, res) {
         } else {
             memTotal = parseInt(stdout);
 
-            console.log(memTotal);
+            console.log("Memoria Total: " + memTotal);
             child1 = exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
                 if (error == null) {
                     memFree = parseInt(stdout);
-                    console.log(memFree);
+                    console.log("Memoria Libre: " + memFree);
                     memUsed = memTotal-memFree;
-                    console.log(memUsed);
+                    console.log("Memoria Usada: " + memUsed);
                     percentUsed = Math.round(memUsed*100/memTotal);
-                    console.log(percentUsed);
+                    console.log("Porcentaje Usado" + percentUsed + "%");
                     child = exec("uptime -p", function (error, stdout, stderr) {
                         if (error !== null) {
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: percentUsed, uptime: upTime });
                             console.log('exec error: ' + error);
                         } else {
                             upTime = stdout.split("\n")[0];
+                            console.log("Up Time" + upTime);
                             res.send({ temperatura: temp_c, memoriaTotal: memTotal, memoriaUsada: memUsed,memoriaLibre:memFree, percentMemUsed: memUsed, uptime: upTime });
                         }
                     });
