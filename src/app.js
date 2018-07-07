@@ -62,7 +62,7 @@ app.get('/checkServo', function (req, res) {
     let duracionInicial = req.query.durIni || 5;
     let duracionFinal = req.query.durFin || 5;
     let anguloInicial = req.query.angIni || 4.5;
-    let anguloFinal = req.quey.angFin || 10.5;
+    let anguloFinal = req.query.angFin || 10.5;
     if (es_numero.test(pin)){
         pin = pin*1;
         if (pin>1 && pin<27){
@@ -106,7 +106,7 @@ app.get('/checkStatus', function (req, res) {
         } else {
             memTotal = parseInt(stdout);
 
-            console.log("Memoria Total: " + memTotal + "KB");
+            console.log("Memoria Total: " + memTotal + "KB  ");
             child1 = exec("egrep --color 'MemFree' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
                 if (error == null) {
                     memFree = parseInt(stdout);
