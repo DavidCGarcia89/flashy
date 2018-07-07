@@ -75,12 +75,11 @@ app.get('/checkServo', function (req, res) {
             console.log("Llamamos a python3")
             child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
                 if (error !== null) {
-                    console.log("¡Llamada con éxito!")
-                    res.send({respuesta: 'Ok'});//¡Llamada con éxito!
-                  console.log('exec error: ' + error);
-                } else {
                     console.log("python script cmd error: " + err)
                     res.send({respuesta: 'Error'});//Hubo un error en la raspberry
+                } else {
+                    console.log("¡Llamada con éxito!")
+                    res.send({respuesta: 'Ok'});//¡Llamada con éxito!
                 }
             });
         } else {
