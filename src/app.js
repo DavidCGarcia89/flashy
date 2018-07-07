@@ -57,6 +57,7 @@ app.get('/checkPin', function (req, res) {
 });
 
 app.get('/checkServo', function (req, res) {
+    console.log("Recibida Llamada checkServo")
     const es_numero = new RegExp("^[0-9]+$");
     let pin = req.query.pin;
     let duracionInicial = req.query.durIni || 5;
