@@ -66,7 +66,7 @@ app.get('/checkServo', function (req, res) {
     if (es_numero.test(pin)){
         pin = pin*1;
         if (pin>1 && pin<27){
-            let comando = "py ./src/python-scripts/checkServo.py " + pin;
+            let comando = "python3 ./src/python-scripts/checkServo.py " + pin;
             if(!isNaN(duracionInicial)) {
                 duracionInicial = duracionInicial*1;
                 comando = comando + " " + duracionInicial;
