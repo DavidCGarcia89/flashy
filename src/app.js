@@ -83,6 +83,7 @@ app.get('/checkServo', function (req, res) {
                     }
                 }
             }
+            console.log(comando)
              exec(comando, function (error, stdout, stderr) {
                 if (error !== null) {
                     console.log("python script cmd error: " + err)
