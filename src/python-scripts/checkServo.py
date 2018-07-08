@@ -29,11 +29,14 @@ print("Duracion Giro Inicial: "+duracionGiroInicial)
 print("Duracion Giro Contrario: "+duracionGiroContrario)
 print("Angulo Inicial: "+anguloInicial)
 print("Angulo Final: "+anguloFinal)
+print("Iniciamos primer giro")
 t_end = time.time() + duracionGiroInicial 
 while time.time() < t_end:      #iniciamos un loop
     p.ChangeDutyCycle(anguloInicial)      #Enviamos un pulso del 4.5% para girar el servo hacia la izquierda
-t_end = time.time() + duracionGiroContrario             
+t_end = time.time() + duracionGiroContrario
+print("Iniciamos segundo giro")         
 while time.time() < t_end:      #iniciamos un loop
     p.ChangeDutyCycle(anguloFinal)     #Enviamos un pulso del 10.5% para girar el servo hacia la derecha
+print("Terminamos")
 p.stop()                      #Detenemos el servo 
 GPIO.cleanup()                #Limpiamos los pines GPIO de la Raspberry y cerramos el script
