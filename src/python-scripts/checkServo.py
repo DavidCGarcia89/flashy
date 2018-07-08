@@ -12,11 +12,11 @@ print(len(sys.argv))
 if num_elementos > 2:
     duracionGiroInicial = float(sys.argv[2])
 else:
-    duracionGiroInicial = 3
+    duracionGiroInicial = 3.0
 if num_elementos > 3:
     duracionGiroContrario = float(sys.argv[3])
 else:
-    duracionGiroContrario = 3
+    duracionGiroContrario = 3.0
 if num_elementos > 4:
     anguloInicial = float(sys.argv[4])
 else:
