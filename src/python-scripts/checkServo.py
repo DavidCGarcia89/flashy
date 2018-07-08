@@ -25,10 +25,10 @@ if num_elementos > 5:
     anguloFinal = float(sys.argv[5])
 else:
     anguloFinal = 10.5
-print("Duracion Giro Inicial: "+duracionGiroInicial)
-print("Duracion Giro Contrario: "+duracionGiroContrario)
-print("Angulo Inicial: "+anguloInicial)
-print("Angulo Final: "+anguloFinal)
+print(duracionGiroInicial)
+print(duracionGiroContrario)
+print(anguloInicial)
+print(anguloFinal)
 print("Iniciamos primer giro")
 t_end = time.time() + duracionGiroInicial 
 while time.time() < t_end:      #iniciamos un loop
