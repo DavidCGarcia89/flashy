@@ -57,23 +57,33 @@ app.get('/checkPin', function (req, res) {
 });
 
 app.get('/checkServo', function (req, res) {
-    console.log("Recibida Llamada checkServo")
     const es_numero = new RegExp("^[0-9]+$");
     let pin = req.query.pin;
-    let duracionInicial = req.query.durIni || 5;
-    let duracionFinal = req.query.durFin || 5;
-    let anguloInicial = req.query.angIni || 4.5;
-    let anguloFinal = req.query.angFin || 10.5;
+    let duracionInicial = req.query.durIni;
+    let duracionFinal = req.query.durFin;
+    let anguloInicial = req.query.angIni;
+    let anguloFinal = req.query.angFin;
     if (es_numero.test(pin)){
         pin = pin*1;
         if (pin>1 && pin<27){
-            duracionInicial = duracionInicial*1;
-            duracionFinal = duracionFinal*1;
-            anguloInicial = anguloInicial*1;
-            anguloFinal = anguloFinal*1;
-            const comando = "python3 ./src/python-scripts/checkServo.py " + pin + " " + duracionInicial + " " + duracionFinal + " " + anguloInicial + " " + anguloFinal;
-            console.log("Llamamos a python3: "+comando)
-            exec(comando, function (error, stdout, stderr) {
+            let comando = "py ./src/python-scripts/checkServo.py " + pin;
+            if(!isNaN(duracionInicial)) {
+                duracionInicial = duracionInicial*1;
+                comando = comando + " " + duracionInicial;
+                if(!isNaN(duracionFinal)) {
+                    duracionFinal = duracionFinal*1;
+                    comando = comando + " " + duracionFinal;
+                    if(!isNaN(anguloInicial)) {
+                        anguloInicial = anguloInicial*1;
+                        comando = comando + " " + anguloInicial;
+                        if (!isNaN(anguloFinal)) {
+                            anguloFinal = anguloFinal*1;
+                            comando = comando + " " + anguloFinal;
+                        }
+                    }
+                }
+            }
+             exec(comando, function (error, stdout, stderr) {
                 if (error !== null) {
                     console.log("python script cmd error: " + err)
                     res.send({respuesta: 'Error'});//Hubo un error en la raspberry
